@@ -1,2 +1,11 @@
 <h1>Hello,Rails</h1>
 <h2><%= @title %></h2>
+<ul>
+<% @articles.each_with_index do |i,index| %>
+    <li>Item 
+        <%= index+1 %>
+        <br>
+        <%= link_to i.body, "/articles/#{index+1}" %>
+    </li>
+<% end %> 
+</ul>
