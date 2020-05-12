@@ -7,7 +7,9 @@
         <%= article.id %>
         <br>
         <%= link_to article.body, article_path(article) %>
+        <br>
         <%= link_to "Edit", edit_article_path(article) %>
+        <%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Are u sure u want to delete this article?"} %>
     </li>
 <% end %> 
 </ul>
