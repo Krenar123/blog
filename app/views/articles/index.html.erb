@@ -1,15 +1,23 @@
-<h1>Hello,Rails</h1>
-<h2><%= @title %></h2>
-<h4> <%= link_to 'New Article',new_article_path %> </h4>
-<ul>
-<% @articles.each do |article| %>
-    <li>Item 
-        <%= article.id %>
-        <br>
-        <%= link_to article.body, article_path(article) %>
-        <br>
-        <%= link_to "Edit", edit_article_path(article) %>
-        <%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Are u sure u want to delete this article?"} %>
-    </li>
-<% end %> 
-</ul>
+<section class="section">
+
+    <div class="container">
+      <h2 class="subtitle">
+       <%= @title %>
+      </h2>
+    </div>
+    <ul>
+    <% @articles.each do |article| %>
+        <li>Item 
+            <%= article.id %>
+            <br>
+            <%= link_to article.body, article_path(article) %>
+            <br>
+            <%= link_to "Edit", edit_article_path(article) %>
+            <%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Are u sure u want to delete this article?"} %>
+        </li>
+    <% end %> 
+    </ul>
+  </section>
+
+
+
