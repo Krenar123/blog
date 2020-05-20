@@ -1,22 +1,44 @@
 <section class="section">
-
     <div class="container">
-      <h2 class="subtitle">
-       <%= @title %>
-      </h2>
+      <div class="columns is-multiline">
+        <div class="column is-6 is-offset-3">  
+          <div class="content">
+            <h2 class="subtitle">
+              <%= @title %>
+            </h2>
+          </div>
+        </div>
+        <% @articles.each do |article| %>
+            <div class="column is-6 is-offset-3"> 
+              <div class="card">
+                <header class="card-header">
+                  <p class="card-header-title">
+                    <%= article.body %>
+                  </p>
+                  <a href="#" class="card-header-icon" aria-label="more options">
+                    <span class="icon">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </a>
+                </header>
+                <div class="card-content">
+                  <div class="content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                    <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+                    <br>
+                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                  </div>
+                </div>
+                <footer class="card-footer">
+                  <%= link_to "Show", article_path(article),class: "card-footer-item" %>
+                  <%= link_to "Edit", edit_article_path(article),class: "card-footer-item" %>
+                  <%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Are u sure u want to delete this article?"},class: "card-footer-item" %>
+                </footer>
+              </div>
+            </div>
+        <% end %> 
+      </div>
     </div>
-    <ul>
-    <% @articles.each do |article| %>
-        <li>Item 
-            <%= article.id %>
-            <br>
-            <%= link_to article.body, article_path(article) %>
-            <br>
-            <%= link_to "Edit", edit_article_path(article) %>
-            <%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Are u sure u want to delete this article?"} %>
-        </li>
-    <% end %> 
-    </ul>
   </section>
 
 

@@ -1,2 +1,4 @@
-<h1>Create new article</h1>
-<%= render 'form', article: @article, button_name: 'Create Article' %>
+<%= render 'form', article: @article,
+    button_name: 'Create Article',
+    cancel_path: root_path,
+    heading: 'New Article' %>
