@@ -6,5 +6,7 @@
       </div>
     </div>
    <%= render @article, show: true %>
+   <%= render 'comments/comment', comments: @comments %>
+   <%= render 'comments/form', article: @article, comments: @comments.build %>
   </div>
 </div>
