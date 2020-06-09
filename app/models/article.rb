@@ -1,5 +1,5 @@
 class Article < ApplicationRecord
     # validation of what columns ( constraint in sql )
+    has_many :comments, dependent: :destroy
     validates :title, presence: true, length: {minimum: 5, maximum: 40}
-    has_many :comments
 end
