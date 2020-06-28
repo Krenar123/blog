@@ -4,19 +4,24 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong><%= comment.commenter %></strong> <small> <%= time_ago_in_words(comment.created_at) %> </small>
+          <strong><%= comment.user.name %></strong> <small> <%= time_ago_in_words(comment.created_at) %> </small>
           <br>
           <%= comment.body %>
         </p>
       </div>
       <nav class="level is-mobile">
         <div class="level-left">
+        <% if equal_users?(comment.user) %>
           <%= link_to edit_article_comment_path(comment.article, comment),class:"level-item" do %>
              <span class="icon is-small"><i class="fas fa-edit"></i></span>
           <% end %>
+        <% end %>
+
+        <% if equal_users?(comment.user) || equal_users?(comment.article.user)%>
           <%= link_to article_comment_path(comment.article, comment), method: :delete,class:"level-item", data: {confirm: "Are u sure? "} do %>
              <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>
           <% end %>
+        <% end %>
         </div>
       </nav>
     </div>

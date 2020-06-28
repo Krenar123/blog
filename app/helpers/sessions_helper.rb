@@ -21,7 +21,7 @@ module SessionsHelper
         @current_user = nil
     end
 
-    def logged_in_notice(alert = :danger, message = 'Must be logged in',path = root_path)
+    def logged_in_notice(alert = 'danger', message = 'Must be logged in', path = root_path)
         flash[alert] = message
         redirect_to path and return
     end
