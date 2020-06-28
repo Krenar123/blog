@@ -21,8 +21,12 @@ module SessionsHelper
         @current_user = nil
     end
 
-    def logged_in_notice
-        flash[:alert] = 'Already logged in'
-        redirect_to root_path and return
+    def logged_in_notice(alert = :danger, message = 'Must be logged in',path = root_path)
+        flash[alert] = message
+        redirect_to path and return
+    end
+
+    def equal_users?(other)
+        current_user == other
     end
 end

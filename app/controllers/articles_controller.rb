@@ -11,11 +11,14 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    logged_in_notice unless logged_in?
     @article = Article.new
   end
 
   def edit
+    logged_in_notice unless logged_in?
     @article = Article.find(params[:id])
+    logged_in_notice('danger','You have no permission') unless equal_users?(@article.user)
   end
 
   def update
@@ -29,7 +32,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    if @article.save
+    @article.user = current_user
+    if @article.save 
       redirect_to @article
     else
       render :new
@@ -38,9 +42,12 @@ class ArticlesController < ApplicationController
 
   def destroy
     article =  Article.find(params[:id])
-    article.destroy
-
-    redirect_to articles_path
+    if equal_users?(article.user)
+      article.destroy
+      redirect_to articles_path
+    else
+      logged_in_notice('danger','You have no permission') 
+    end
   end
 
   private
