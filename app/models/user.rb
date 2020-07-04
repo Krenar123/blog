@@ -8,7 +8,6 @@ class User < ApplicationRecord
   has_secure_password
  
   has_many :articles, dependent: :destroy
-  has_many :comments
   before_save :email_to_downcase
 
   validates :name, presence: true, length: { maximum: 255 }
