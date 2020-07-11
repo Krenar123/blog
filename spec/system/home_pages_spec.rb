@@ -7,17 +7,6 @@ RSpec.describe "HomePages" do
     visit root_path
   end
 
-  def log_in(user)
-    visit login_path
-
-    within('form') do
-      fill_in "Email", with: user.email
-      fill_in "Password", with: user.password
-
-      click_on 'Log In'
-    end
-  end
-
   it 'shows the home link' do
     expecting = page.has_link?('My Blog')
 
@@ -65,21 +54,15 @@ RSpec.describe "HomePages" do
     end
 
     it 'shows the article title' do
-      expecting = page.has_content?(article.title)
-
-      expect(expecting).to be true
+      expect(page).to have_content(article.title)
     end
 
     it 'shows the article body' do
-      expecting = page.has_content?(article.body)
-
-      expect(expecting).to be true
+      expect(page).to have_content(article.body)
     end
 
     it 'shows the link to article' do
-      expecting = page.has_link?('Show')
-
-      expect(expecting).to be true
+      expect(page).to have_link('Show')
     end
   end
 end
