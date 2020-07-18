@@ -16,9 +16,12 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    logged_in_notice unless logged_in?
-    @article = Article.find(params[:id])
-    logged_in_notice('danger','You have no permission') unless equal_users?(@article.user)
+    if logged_in?
+      @article = Article.find(params[:id])
+      logged_in_notice('danger','You have no permission') unless equal_users?(@article.user)
+    else
+      logged_in_notice
+    end
   end
 
   def update
