@@ -147,8 +147,8 @@ RSpec.describe "Users", type: :request do
         post_params = {
           params: {
             ss: {
-              email: login_user.email,
-              password: login_user.password
+              email: user.email,
+              password: user.password
             }
           }
         }
@@ -164,11 +164,40 @@ RSpec.describe "Users", type: :request do
       end
 
       context 'when articles user is different from logged in user'do
-        
+        let(:user) { create(:user) }
+        let(:article) { create(:article,user:user) }
+        let(:login_user) { create(:user) }
+ 
+        it 'cannot delete the article'do
+          get '/login'
+
+          post_params = {
+            params: {
+              ss: {
+                email: login_user.email,
+                password: login_user.password
+              }
+            }
+          }
+
+          post '/login', post_params
+
+          follow_redirect!
+
+          delete "/articles/#{article.id}"
+
+          expect(response).to redirect_to(root_path)
+        end
       end
 
       context 'when no user logged in' do
-        
+        let(:article) { create(:article,user:user) }
+ 
+        it 'cannot delete the article'do
+          delete "/articles/#{article.id}"
+
+          expect(response).to redirect_to(root_path)
+        end
       end
     end
   end
